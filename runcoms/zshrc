@@ -6,6 +6,9 @@
 #
 
 # Source Prezto.
+#find . -name "application.conf.template" -exec sed -i '1 i include "secrets.conf"' {} \;
+#find config/jobs -name "*.conf.template" -exec sed -i 's/"{{ \(.*\) }}"/${\1}/' {} \;
+#find config/jobs -name "*.template" -exec rename 's/.template//' {} \;
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
@@ -19,7 +22,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 CDPATH=.:~:/mnt/data/backup/dev/projects/
 
 #export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:PermSize=128M -XX:MaxPermSize=256M -Xms2G -Xmx2G"
-export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=512M -XX:MetaspaceSize=256M -Xms2G -Xmx2G"
+#export SBT_OPTS="-XX:+CMSClassUnloadingEnabled -XX:MaxMetaspaceSize=512M -XX:MetaspaceSize=256M -Xms2G -Xmx2G"
 export CLUSTERING=/data/client/clustering
 export SCRIPT=/mnt/data/backup/dev/script/
 
@@ -50,7 +53,7 @@ alias cat='_cat'
 alias vbox='sudo modprobe -a vboxnetadp vboxnetflt vboxpci'
 alias rr='ranger'
 
-fortune | ponysay
+fortune ascii-art | ponysay
 
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
 
@@ -62,6 +65,7 @@ export PATH=/Users/yamo/opt/openshift-origin:$PATH
 export PATH=$GOPATH/bin:$PATH
 export PATH=~/opt/StreakyCobra-gws-3618de8/src:$PATH
 export PATH=~/opt/spark/bin:$PATH
+export PATH=~/.teads-central:$PATH
 alias penguen="ssh penguen -t tmux a"
 alias REPLesent='scala -Dscala.color -language:_ -nowarn -i REPLesent.scala'
 
@@ -107,3 +111,55 @@ function ogp() {
 }
 function odpb() { oc describe policyBindings :default -n $1 }
 function ol() { for pod in $(oc get pods -o json | jq -r ".items[].metadata.name"); do oc logs $pod; done }
+
+alias gcm='git branch --merged master | grep -v master | xargs git branch -d'
+
+# Teads
+source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
+function mig() { touch $(date +"V%Y%m%d%H%M__$1.sql") }
+
+#https://github.com/pstadler/keybase-gpg-github/issues/11
+GPG_TTY=$(tty)
+export GPG_TTY
+
+alias redis-cli-eu='redis-cli -c -h be-lookalike-cluster.srwool.clustercfg.euw1.cache.amazonaws.com -p 6379'
+alias redis-cli-us='redis-cli -c -h be-lookalike-cluster.rgzmow.clustercfg.use1.cache.amazonaws.com -p 6379'
+alias redis-cli-ap='redis-cli -c -h be-lookalike-cluster.rgpv3r.clustercfg.apne1.cache.amazonaws.com -p 6379'
+
+SPARK_DIR=~/opt/spark
+export PATH=$SPARK_DIR/bin:$PATH
+export PATH=~/opt/bin:$PATH
+function spl() {
+    aws s3 cp "s3://teads-hadoop/engine/spark-logs/${1}_1" $SPARK_DIR/history/
+}
+function spi() {
+  wget http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.1/hadoop-aws-2.7.1.jar
+  wget http://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
+}
+  export NVM_DIR="$HOME/.nvm"
+  . "/usr/local/opt/nvm/nvm.sh"
+
+alias crane="teads-central crane wrapper"
+alias ganglia='ssh 10.20.108.54 -L 8158:10.20.108.54:80 -N'
+REPOS="                                                                  
+  -r http://nexus.teads.net/content/repositories/releases
+  -r http://nexus.teads.net/content/repositories/snapshots
+  -r https://dl.bintray.com/scalaz/releases
+  -r https://oss.sonatype.org/content/repositories/releases
+  -r http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release
+"
+alias cat='bat'
+alias du="ncdu --color dark"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+alias v='open "$(fd . --type f ~/videos | fzf)"'
+alias javals='/usr/libexec/java_home -V' #osx
+export JAVA_HOME="$(/usr/libexec/java_home -v '1.8*')"
+alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yann.moisan/opt/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc'; fi
+alias pierre='sbt exit'
