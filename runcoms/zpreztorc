@@ -30,11 +30,13 @@ zstyle ':prezto:load' pmodule \
   'environment' \
   'terminal' \
   'editor' \
+  'homebrew' \
   'history' \
   'directory' \
   'spectrum' \
   'utility' \
   'completion' \
+  'fasd' \
   'archive' \
   'rsync' \
   'pacman' \
@@ -48,7 +50,7 @@ zstyle ':prezto:load' pmodule \
 #
 
 # Set the query found color.
-# zstyle ':prezto:module:autosuggestions:color' found ''
+zstyle ':prezto:module:autosuggestions:color' found ''
 
 #
 # Completions
