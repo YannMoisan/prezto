@@ -39,6 +39,7 @@ alias projects="cd ~/projects"
 alias rr='ranger'
 alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
+alias history-clean="history 1 | sed 's/^[ ]*[^ ]*[ ]*//'"
 
 fortune ascii-art | ponysay
 
@@ -86,13 +87,11 @@ alias redis-cli-ap='redis-cli -c -h be-lookalike-cluster.rgpv3r.clustercfg.apne1
 alias crane="teads-central crane wrapper"
 alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
 
-REPOS="                                                                  
-  -r http://nexus.teads.net/content/repositories/releases
-  -r http://nexus.teads.net/content/repositories/snapshots
-  -r https://dl.bintray.com/scalaz/releases
-  -r https://oss.sonatype.org/content/repositories/releases
-  -r http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release
-"
+REPOS="http://nexus.teads.net/content/repositories/releases,\
+http://nexus.teads.net/content/repositories/snapshots,\
+https://dl.bintray.com/scalaz/releases,\
+https://oss.sonatype.org/content/repositories/releases,\
+http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release"
 
 function spl() {
     aws s3 cp "s3://teads-hadoop/engine/spark-logs/${1}_1" $SPARK_DIR/history/
