@@ -48,8 +48,6 @@ alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
 alias history-clean="history 1 | sed 's/^[ ]*[^ ]*[ ]*//'"
 
-fortune ascii-art | ponysay
-
 # https://github.com/StreakyCobra/gws/issues/17
 alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"
 
@@ -74,11 +72,14 @@ if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/Users
 if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Teads
-source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
+export COURSIER_REPOSITORIES="ivy2Local|central|https://nexus.teads.net/content/repositories/releases|https://nexus.teads.net/content/repositories/snapshots"
+export COURSIER_TTL=0s
+
+[ -f /usr/local/share/zsh/site-functions/aws_zsh_completer.sh ] && source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
 function mig() { touch $(date +"V%Y%m%d%H%M__$1.sql") }
 
 alias javals='/usr/libexec/java_home -V' #osx
-export JAVA_HOME="$(/usr/libexec/java_home -v '1.8*')"
+export JAVA_HOME="$(/usr/libexec/java_home -v '13*')"
 
 function j8() {
     export JAVA_HOME="$(/usr/libexec/java_home -v '1.8*')"
