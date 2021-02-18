@@ -32,6 +32,10 @@ else
 fi
 
 export PATH=$DOTFILES/bin:$PATH
+SPARK_DIR=~/opt/spark
+export PATH=$SPARK_DIR/bin:$PATH
+export PATH=~/opt/bin:$PATH
+
 function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
 }
@@ -57,10 +61,6 @@ alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/li
 #https://github.com/pstadler/keybase-gpg-github/issues/11
 GPG_TTY=$(tty)
 export GPG_TTY
-
-SPARK_DIR=~/opt/spark
-export PATH=$SPARK_DIR/bin:$PATH
-export PATH=~/opt/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias v='open "$(fd . --type f ~/videos | fzf)"'
