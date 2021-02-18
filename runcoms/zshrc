@@ -65,19 +65,6 @@ export GPG_TTY
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 alias v='open "$(fd . --type f ~/videos | fzf)"'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yann.moisan/opt/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yann.moisan/opt/google-cloud-sdk/completion.zsh.inc'; fi
-
-# Teads
-export COURSIER_REPOSITORIES="ivy2Local|central|https://nexus.teads.net/content/repositories/releases|https://nexus.teads.net/content/repositories/snapshots"
-export COURSIER_TTL=0s
-
-[ -f /usr/local/share/zsh/site-functions/aws_zsh_completer.sh ] && source /usr/local/share/zsh/site-functions/aws_zsh_completer.sh
-function mig() { touch $(date +"V%Y%m%d%H%M__$1.sql") }
-
 alias javals='/usr/libexec/java_home -V' #osx
 export JAVA_HOME="$(/usr/libexec/java_home -v '13*')"
 
@@ -88,26 +75,7 @@ function j11() {
     export JAVA_HOME="$(/usr/libexec/java_home -v 'Zulu 11')"
 }
 
-alias redis-cli-eu='redis-cli -c -h be-lookalike-cluster.srwool.clustercfg.euw1.cache.amazonaws.com -p 6379'
-alias redis-cli-us='redis-cli -c -h be-lookalike-cluster.rgzmow.clustercfg.use1.cache.amazonaws.com -p 6379'
-alias redis-cli-ap='redis-cli -c -h be-lookalike-cluster.rgpv3r.clustercfg.apne1.cache.amazonaws.com -p 6379'
-
-alias crane="teads-central crane wrapper"
 alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
-
-REPOS="http://nexus.teads.net/content/repositories/releases,\
-http://nexus.teads.net/content/repositories/snapshots,\
-https://dl.bintray.com/scalaz/releases,\
-https://oss.sonatype.org/content/repositories/releases,\
-http://redshift-maven-repository.s3-website-us-east-1.amazonaws.com/release"
-
-function spl() {
-    aws s3 cp "s3://teads-hadoop/engine/spark-logs/${1}_1" $SPARK_DIR/history/
-}
-function spi() {
-  wget http://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/2.7.1/hadoop-aws-2.7.1.jar
-  wget http://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.7.4/aws-java-sdk-1.7.4.jar
-}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
