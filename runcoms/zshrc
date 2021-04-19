@@ -19,22 +19,16 @@ fi
 
 # Customize to your needs...
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
-CDPATH=.:~:/mnt/data/backup/dev/projects/
-
 if [[ $(uname -s) == "Darwin" ]]; then
-    DOTFILES=~/projects/dotfiles
+    DOTFILES=~/projects/perso/dotfiles
 else 
     DOTFILES=/mnt/data/backup/dev/projects/dotfiles
 fi
 
 export PATH=$DOTFILES/bin:$PATH
 SPARK_DIR=~/opt/spark
-export PATH=$SPARK_DIR/bin:$PATH
-export PATH=~/opt/bin:$PATH
+[[ -f $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
+[[ -f ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
 
 function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
@@ -43,30 +37,20 @@ function cl() {
 alias cat='bat'
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias du="ncdu --color dark"
-alias dush="du -sh | sort -h | tail"
+alias dush="\du -sh | sort -h | tail"
 alias h=history
 alias penguen="ssh penguen -t tmux a"
-alias projects="cd ~/projects"
 alias rr='ranger'
 alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
-alias history-clean="history 1 | sed 's/^[ ]*[^ ]*[ ]*//'"
 
 # https://github.com/StreakyCobra/gws/issues/17
 alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"
 
-# added by travis gem
-[ -f /Users/yamo/.travis/travis.sh ] && source /Users/yamo/.travis/travis.sh
-
-#https://github.com/pstadler/keybase-gpg-github/issues/11
-GPG_TTY=$(tty)
-export GPG_TTY
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias v='open "$(fd . --type f ~/videos | fzf)"'
 
 alias javals='/usr/libexec/java_home -V' #osx
-export JAVA_HOME="$(/usr/libexec/java_home -v '13*')"
+export JAVA_HOME="$(/usr/libexec/java_home -v '1.8')"
 
 function j8() {
     export JAVA_HOME="$(/usr/libexec/java_home -v '1.8*')"
@@ -79,3 +63,24 @@ alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Source in your profile to enable shell command completion for gcloud.
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+
+# Source in your profile to add the Google Cloud SDK command line tools to your $PATH.
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
+
+fif() {
+	rg  \
+	--column \
+	--line-number \
+	--no-column \
+	--no-heading \
+	--fixed-strings \
+	--ignore-case \
+	--hidden \
+	--follow \
+	--glob '!.git/*' "$1" \
+	| awk -F  ":" '/1/ {start = $2<5 ? 0 : $2 - 5; end = $2 + 5; print $1 " " $2 " " start ":" end}' \
+	| fzf --preview 'bat --wrap character --color always {1} --highlight-line {2} --line-range {3}' --preview-window wrap
+}
