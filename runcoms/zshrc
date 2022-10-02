@@ -43,6 +43,7 @@ alias penguen="ssh penguen -t tmux a"
 alias rr='ranger'
 alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
+alias sbt-new="sbt new scala/scala-seed.g8"
 
 # https://github.com/StreakyCobra/gws/issues/17
 alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"
