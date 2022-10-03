@@ -30,6 +30,9 @@ SPARK_DIR=~/opt/spark
 [[ -f $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
 [[ -f ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
 
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+
 function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
 }
@@ -44,6 +47,9 @@ alias rr='ranger'
 alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
 alias sbt-new="sbt new scala/scala-seed.g8"
+alias history-clean="history 1 | sed 's/^[ ]*[^ ]*[ ]*//'"
+alias org_image="exiftool -r -ext 'jpg' '-filename<Photos/\${Exif:Make}_\${Exif:Model}/\${CreateDate}/\${filename}' -d '%Y/%Y-%m-%d'"
+alias org_video="exiftool -r -ext 'mp4' -ext 'mov' '-filename<Videos/\${CreateDate}/\${filename}' -d '%Y/%Y-%m-%d'"
 
 # https://github.com/StreakyCobra/gws/issues/17
 alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"
