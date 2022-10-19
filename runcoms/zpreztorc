@@ -34,15 +34,14 @@ zstyle ':prezto:load' pmodule \
   'terminal' \
   'editor' \
   'homebrew' \
+  'command-not-found' \
   'history' \
   'directory' \
-  'spectrum' \
   'utility' \
   'completion' \
   'fasd' \
   'archive' \
-  'rsync' \
-  'pacman' \
+  'dpkg' \
   'syntax-highlighting' \
   'history-substring-search' \
   'autosuggestions' \
