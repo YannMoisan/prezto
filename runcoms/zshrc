@@ -32,6 +32,7 @@ SPARK_DIR=~/opt/spark
 
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
+export PATH="$HOME/projects/perso/diff-so-fancy:$PATH"
 
 function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
@@ -39,6 +40,8 @@ function cl() {
 
 # https://github.com/sharkdp/bat#on-ubuntu-using-apt
 alias cat='batcat'
+# https://github.com/sharkdp/fd#on-ubuntu
+alias fd='fdfind'
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias du="ncdu --color dark"
 alias dush="\du -sh | sort -h | tail"
@@ -55,7 +58,10 @@ alias org_video="exiftool -r -ext 'mp4' -ext 'mov' '-filename<Videos/\${CreateDa
 # https://github.com/StreakyCobra/gws/issues/17
 alias gws="PATH=/usr/local/opt/coreutils/libexec/gnubin:usr/local/opt/gnu-sed/libexec/gnubin:$PATH gws"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Append this line to ~/.zshrc to enable fzf keybindings for Zsh:
+source /usr/share/doc/fzf/examples/key-bindings.zsh
+# Append this line to ~/.zshrc to enable fuzzy auto-completion for Zsh:
+source /usr/share/doc/fzf/examples/completion.zsh
 
 if [[ $(uname -s) == "Darwin" ]]; then
     alias javals='/usr/libexec/java_home -V' #osx
@@ -80,6 +86,8 @@ files=$(\cat <<EOF
 $dpb/Documents/TODO.txt
 $dpb/Work/zenly/english-courses.txt
 $dpb/Documents/2022-jobs
+$HOME/.zshrc
+$HOME/.zpreztorc
 EOF
 )
 vim $(echo $files | fzf)
