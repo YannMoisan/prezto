@@ -18,21 +18,16 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
 fi
 
 # Customize to your needs...
+export LS_COLORS="$(vivid generate solarized-dark)"
 
-if [[ $(uname -s) == "Darwin" ]]; then
-    DOTFILES=~/projects/perso/dotfiles
-else 
-    DOTFILES=/mnt/data/backup/dev/projects/dotfiles
-fi
+DOTFILES=~/projects/perso/dotfiles
 
-export PATH=$DOTFILES/bin:$PATH
 SPARK_DIR=~/opt/spark
 [[ -f $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
 [[ -f ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
 
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
-export PATH="$HOME/projects/perso/diff-so-fancy:$PATH"
 
 function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
@@ -46,7 +41,6 @@ alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias du="ncdu --color dark"
 alias dush="\du -sh | sort -h | tail"
 alias h=history
-alias penguen="ssh penguen -t tmux a"
 alias rr='ranger'
 alias todo="vim ~/Dropbox/Documents/TODO.txt"
 alias tv="vlc http://mafreebox.freebox.fr/freeboxtv/playlist.m3u"
