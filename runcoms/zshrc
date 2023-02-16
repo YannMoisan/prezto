@@ -25,6 +25,7 @@ DOTFILES=~/projects/perso/dotfiles
 SPARK_DIR=~/opt/spark
 [[ -f $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
 [[ -f ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
+[[ -f ~/projects/perso/gws/src/gws ]] && export PATH=~/projects/perso/gws/src:$PATH
 
 export GEM_HOME="$HOME/gems"
 export PATH="$HOME/gems/bin:$PATH"
@@ -74,18 +75,7 @@ alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-function oo() {
-dpb=~/Dropbox
-files=$(\cat <<EOF
-$dpb/Documents/TODO.txt
-$dpb/Work/zenly/english-courses.txt
-$dpb/Documents/2022-jobs
-$HOME/.zshrc
-$HOME/.zpreztorc
-EOF
-)
-vim $(echo $files | fzf)
-}
+alias oo='book'
 
 fif() {
 	rg  \
