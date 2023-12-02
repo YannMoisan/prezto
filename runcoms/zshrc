@@ -60,18 +60,6 @@ source /usr/share/doc/fzf/examples/key-bindings.zsh
 # Append this line to ~/.zshrc to enable fuzzy auto-completion for Zsh:
 source /usr/share/doc/fzf/examples/completion.zsh
 
-if [[ $(uname -s) == "Darwin" ]]; then
-    alias javals='/usr/libexec/java_home -V' #osx
-    export JAVA_HOME="$(/usr/libexec/java_home -v '1.8')"
-
-    function j8() {
-        export JAVA_HOME="$(/usr/libexec/java_home -v '1.8*')"
-    }
-    function j11() {
-        export JAVA_HOME="$(/usr/libexec/java_home -v 'Zulu 11')"
-    }
-fi
-
 alias coursier_update='curl -Lo ~/opt/bin/coursier https://git.io/coursier-cli'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
