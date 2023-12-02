@@ -34,10 +34,12 @@ function cl() {
     echo "$1" >> $DOTFILES/bin/yamocl.txt
 }
 
-# https://github.com/sharkdp/bat#on-ubuntu-using-apt
-alias cat='batcat'
-# https://github.com/sharkdp/fd#on-ubuntu
-alias fd='fdfind'
+if [[ $(uname -s) == "Linux" ]]; then
+    # https://github.com/sharkdp/bat#on-ubuntu-using-apt
+    alias cat='batcat'
+    # https://github.com/sharkdp/fd#on-ubuntu
+    alias fd='fdfind'
+fi
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 alias du="ncdu --color dark"
 alias dush="\du -sh | sort -h | tail"
