@@ -23,8 +23,8 @@ export LS_COLORS="$(vivid generate solarized-dark)"
 DOTFILES=~/projects/perso/dotfiles
 
 SPARK_DIR=~/opt/spark
-[[ -f $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
-[[ -f ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
+[[ -d $SPARK_DIR ]] && export PATH=$SPARK_DIR/bin:$PATH
+[[ -d ~/opt/bin ]] && export PATH=~/opt/bin:$PATH
 [[ -f ~/projects/perso/gws/src/gws ]] && export PATH=~/projects/perso/gws/src:$PATH
 
 export GEM_HOME="$HOME/gems"
@@ -84,6 +84,10 @@ fif() {
 
 export LD_LIBRARY_PATH="/home/yamo/opt/async-profiler-2.8.3-linux-x64/build/"
 
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+source /usr/local/opt/chruby/share/chruby/chruby.sh
+source /usr/local/opt/chruby/share/chruby/auto.sh
+chruby ruby-3.1.3
